@@ -31,7 +31,7 @@
         };
 
         const LOSS_LEVELS = ["Normal","Mild","Moderate","Severe","Profound"];
-        const LOSS_TYPES  = ["Sensorineural","Conductive","Mixed"];
+        const LOSS_TYPES  = ["No Loss", "Sensorineural", "Conductive", "Mixed"];
         const MANUFACTURERS = ["Starkey","Oticon","Widex"];
 
         const LOSS_COLORS = {
@@ -43,7 +43,7 @@
           Normal:   "Your hearing falls within the normal range. No hearing loss was detected.",
           Mild:     "You may find it difficult to follow conversations in noisy environments or when voices are soft.",
           Moderate: "Understanding speech without a hearing aid is likely difficult, especially in group settings or over the phone.",
-          Severe:   "Hearing conversation without amplification is very difficult. Hearing aids are strongly recommended.",
+          Severe: "Hearing conversation without amplification is very difficult. Hearing aids are strongly recommended.",
           Profound: "Understanding speech without powerful amplification is extremely challenging. Hearing aids are essential.",
         };
 
@@ -131,7 +131,7 @@
                 <div style={{ fontFamily:"Georgia,serif", fontSize:16, fontWeight:700, color, marginBottom:1 }}>
                   {level||"—"} Loss
                 </div>
-                <div style={{ fontSize:10, color:B.muted, marginBottom:6 }}>{type||"—"} Hearing Loss</div>
+                <div style={{ fontSize:10, color:B.muted, marginBottom:6 }}>{type||"—"}</div>
                 <div style={{ height:4, background:B.border, borderRadius:2, marginBottom:7, overflow:"hidden" }}>
                   <div style={{ height:"100%", width:`${pct}%`, background:color, borderRadius:2 }} />
                 </div>
