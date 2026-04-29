@@ -177,7 +177,8 @@
 
         const PageFooter = ({ audiologistName, dateStr, title, clientName, page }) => (
           <div style={{ borderTop:`1px solid ${B.border}`, padding:"7px 26px", display:"flex",
-            justify:"space-between", alignItems:"center", background:"#fafbfc", flexShrink:0 }}>
+            justify:"space-between", alignItems:"center", background:"#fafbfc", 
+            position: "absolute", bottom: 0, left: 0, right: 0, height: "35px" }}>
             <div style={{ fontSize:8.5, color:B.muted }}>
               Prepared by {audiologistName} &bull; {dateStr} &bull; Prepared for {title} {clientName}
             </div>
@@ -208,7 +209,6 @@
             ? new Date(form.testDate+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})
             : "";
 
-          // Grammar Logic
           const hasLeftLoss = form.leftEar.level !== "Normal";
           const hasRightLoss = form.rightEar.level !== "Normal";
           const totalEarsAffected = (hasLeftLoss ? 1 : 0) + (hasRightLoss ? 1 : 0);
@@ -223,14 +223,19 @@
             <>
               <style>{`
                 @media print {
-                  body { margin:0; background:white; }
+                  body { margin:0; background:white; -webkit-print-color-adjust: exact; }
                   .no-print { display:none !important; }
                   .pdf-page {
-                    width:210mm !important; height:297mm !important; max-height:297mm !important;
-                    page-break-after:always; box-shadow:none !important; margin:0 !important;
+                    width:210mm !important; 
+                    height:296.5mm !important; 
+                    page-break-after:always; 
+                    box-shadow:none !important; 
+                    margin:0 !important;
+                    position: relative !important;
                     overflow:hidden !important;
+                    zoom: 0.98;
                   }
-                  .preview-shell { padding:0 !important; background:white !important; gap:0 !important; }
+                  .preview-shell { padding:0 !important; background:white !important; }
                 }
                 @page { size:A4 portrait; margin:0; }
                 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
@@ -362,28 +367,27 @@
                       </button>
                     </div>
 
-                    {/* PAGE 1 */}
-                    <div className="pdf-page" style={{ width:595, background:"white",
+                    <div className="pdf-page" style={{ width:"210mm", background:"white",
                       boxShadow:"0 4px 28px rgba(74,32,96,0.18)", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr}
                         audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
+                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:10 }}>
                         <div>
                           <SectionTitle>Your Hearing Test Results</SectionTitle>
-                          <div style={{ display:"flex", gap:12, marginBottom:9, flexWrap:"wrap" }}>
+                          <div style={{ display:"flex", gap:12, marginBottom:8, flexWrap:"wrap" }}>
                             {Object.entries(LOSS_COLORS).map(([k,c])=>(
                               <div key={k} style={{ display:"flex", alignItems:"center", gap:4, fontSize:9.5, color:B.muted }}>
                                 <div style={{ width:7, height:7, borderRadius:"50%", background:c }} />{k}
                               </div>
                             ))}
                           </div>
-                          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:9 }}>
+                          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:8 }}>
                             <EarCard level={form.leftEar.level} type={form.leftEar.type} side="left" label="Left Ear" />
                             <EarCard level={form.rightEar.level} type={form.rightEar.type} side="right" label="Right Ear" />
                           </div>
                           <div style={{ background:"#fff8e1", border:"1px solid #f0c96e", borderRadius:6,
-                              padding:"8px 12px", fontSize:10.5, color:"#5a3e00", lineHeight:1.6 }}>
+                              padding:"8px 12px", fontSize:10.5, color:"#5a3e00", lineHeight:1.5 }}>
                               <strong>Summary:</strong> {recommendationText}
                           </div>
                         </div>
@@ -397,18 +401,18 @@
                               ["The cognitive link","Research shows that treating hearing loss helps reduce the risk of cognitive decline."],
                             ].map(([title,body])=>(
                               <div key={title} style={{ background:B.purpleLight, borderRadius:6,
-                                padding:"9px 11px", border:`1px solid ${B.purpleBorder}` }}>
-                                <div style={{ fontWeight:700, fontSize:10.5, color:B.purple, marginBottom:3 }}>{title}</div>
-                                <div style={{ fontSize:10, color:"#4a5568", lineHeight:1.5 }}>{body}</div>
+                                padding:"8px 10px", border:`1px solid ${B.purpleBorder}` }}>
+                                <div style={{ fontWeight:700, fontSize:10.5, color:B.purple, marginBottom:2 }}>{title}</div>
+                                <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.4 }}>{body}</div>
                               </div>
                             ))}
                           </div>
                         </div>
                         {form.notes && (
-                          <div>
+                          <div style={{marginTop: 5}}>
                             <SectionTitle>Audiologist Notes</SectionTitle>
                             <div style={{ background:"#f8fafc", border:`1px solid ${B.border}`, borderRadius:6,
-                              padding:"9px 12px", fontSize:10.5, color:"#2d3748", lineHeight:1.6 }}>
+                              padding:"8px 12px", fontSize:10.5, color:"#2d3748", lineHeight:1.5 }}>
                               {form.notes}
                             </div>
                           </div>
@@ -418,13 +422,12 @@
                         title={form.title} clientName={form.clientName} page="1" />
                     </div>
 
-                    {/* PAGE 2 */}
-                    <div className="pdf-page" style={{ width:595, background:"white",
+                    <div className="pdf-page" style={{ width:"210mm", background:"white",
                       boxShadow:"0 4px 28px rgba(74,32,96,0.18)", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr}
                         audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:16 }}>
+                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:14 }}>
                         {mfr && (
                           <div>
                             <SectionTitle>Your Recommended Hearing Aid Brand</SectionTitle>
@@ -436,13 +439,13 @@
                                 <div style={{ fontSize:10.5, color:"rgba(74,32,96,0.75)", marginTop:1 }}>{mfr.tagline}</div>
                               </div>
                               <div style={{ padding:"11px 15px" }}>
-                                <div style={{ fontSize:11, color:"#2d3748", lineHeight:1.6, fontStyle:"italic",
-                                  marginBottom:9, paddingBottom:9, borderBottom:`1px solid ${B.goldBorder}` }}>
+                                <div style={{ fontSize:10.5, color:"#2d3748", lineHeight:1.5, fontStyle:"italic",
+                                  marginBottom:8, paddingBottom:8, borderBottom:`1px solid ${B.goldBorder}` }}>
                                   {mfr.why}
                                 </div>
-                                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5px 14px" }}>
+                                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"4px 14px" }}>
                                   {mfr.highlights.map((h,i)=>(
-                                    <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:6, fontSize:10.5, color:"#2d3748" }}>
+                                    <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:6, fontSize:10, color:"#2d3748" }}>
                                       <div style={{ width:4, height:4, borderRadius:"50%", background:B.gold, marginTop:5 }} />
                                       <span>{h}</span>
                                     </div>
@@ -460,15 +463,14 @@
                               <div key={i} style={{ 
                                 background: B.purpleLight, 
                                 borderRadius:7, 
-                                padding:"12px 11px", 
+                                padding:"10px 11px", 
                                 borderLeft: `3px solid ${B.purple}`,
                                 display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "start"
+                                flexDirection: "column"
                               }}>
-                                <div style={{ fontSize:20, marginBottom:5 }}>{s.icon}</div>
-                                <div style={{ fontWeight:700, fontSize:11, color: B.purple, marginBottom:3 }}>{s.title}</div>
-                                <div style={{ fontSize:10, color:"#4a5568", lineHeight:1.5 }}>
+                                <div style={{ fontSize:18, marginBottom:4 }}>{s.icon}</div>
+                                <div style={{ fontWeight:700, fontSize:10.5, color: B.purple, marginBottom:2 }}>{s.title}</div>
+                                <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.4 }}>
                                     {s.title === "Connect Member Offer" ? (
                                         <span>Become a Connect Member today to receive <strong>£150</strong> off your new hearing aids and access exclusive ongoing benefits.</span>
                                     ) : s.desc}
@@ -478,13 +480,13 @@
                           </div>
                         </div>
 
-                        <div style={{ background:B.purple, borderRadius:9, padding:"13px 16px", display:"flex", alignItems:"center", gap:13, marginTop: "auto" }}>
+                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", display:"flex", alignItems:"center", gap:13, marginTop: "auto", marginBottom: "40px" }}>
                           <div style={{ color:"rgba(255,255,255,0.9)", lineHeight:1.4 }}>
-                            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12.5, fontWeight:700, marginBottom:3 }}>
+                            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:2 }}>
                               You are not alone.
                             </div>
-                            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:10, lineHeight:1.6 }}>
-                              Modern {totalEarsAffected === 1 ? "hearing aids are" : "hearing aids are"} smaller, smarter and more natural-sounding than ever before. Most clients notice a remarkable difference from day one.
+                            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:9.5, lineHeight:1.5 }}>
+                              Modern hearing technology is smaller, smarter and more natural-sounding than ever before. Most clients notice a remarkable difference from day one.
                             </div>
                           </div>
                         </div>
