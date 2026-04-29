@@ -117,7 +117,7 @@
     );
 
     const SectionTitle = ({ children }) => (
-      <div style={{ fontFamily:"Georgia,serif", fontSize:11, fontWeight:700, color:B.purple,
+      <div style={{ fontFamily:"Georgia,serif", fontSize:13, fontWeight:700, color:B.purple,
         borderBottom:`1.5px solid ${B.purpleMid}`, paddingBottom:2, marginBottom:5 }}>
         {children}
       </div>
@@ -128,20 +128,20 @@
       const pct   = {Normal:5,Mild:22,Moderate:46,Severe:70,Profound:93}[level] || 0;
       return (
         <div style={{ border:`1px solid ${B.border}`, borderRadius:6, overflow:"hidden" }}>
-          <div style={{ padding:"3px 8px", fontWeight:700, fontSize:8, textTransform:"uppercase",
+          <div style={{ padding:"3px 8px", fontWeight:700, fontSize:9.5, textTransform:"uppercase",
             background: side==="left"?"#e8f0fb":"#fdeee3",
             color: side==="left"?"#1565c0":"#b85c1a" }}>
             {label}
           </div>
           <div style={{ padding:"5px 8px" }}>
-            <div style={{ fontFamily:"Georgia,serif", fontSize:11, fontWeight:700, color, marginBottom:0 }}>
+            <div style={{ fontFamily:"Georgia,serif", fontSize:13, fontWeight:700, color, marginBottom:0 }}>
               {level||"—"} Loss
             </div>
-            <div style={{ fontSize:8, color:B.muted, marginBottom:3 }}>{type||"—"}</div>
+            <div style={{ fontSize:9.5, color:B.muted, marginBottom:3 }}>{type||"—"}</div>
             <div style={{ height:2.5, background:B.border, borderRadius:2, marginBottom:3, overflow:"hidden" }}>
               <div style={{ height:"100%", width:`${pct}%`, background:color, borderRadius:2 }} />
             </div>
-            <div style={{ fontSize:8, color:"#4a5568", lineHeight:1.3 }}>
+            <div style={{ fontSize:9, color:"#4a5568", lineHeight:1.3 }}>
               {level ? LOSS_DESCRIPTIONS[level] : ""}
             </div>
           </div>
@@ -346,13 +346,13 @@
                           <EarCard level={form.leftEar.level} type={form.leftEar.type} side="left" label="Left Ear" />
                           <EarCard level={form.rightEar.level} type={form.rightEar.type} side="right" label="Right Ear" />
                         </div>
-                        <div style={{ background:"#fff8e1", border:"1px solid #f0c96e", borderRadius:5, padding:"5px 9px", fontSize:8.5, color:"#5a3e00", lineHeight:1.4 }}>
+                        <div style={{ background:"#fff8e1", border:"1px solid #f0c96e", borderRadius:5, padding:"5px 9px", fontSize:10, color:"#5a3e00", lineHeight:1.4 }}>
                           <strong>Summary:</strong> {recommendationText}
                         </div>
                         {form.notes && (
                           <div>
                             <SectionTitle>Audiologist Notes</SectionTitle>
-                            <div style={{ background:"#f8fafc", border:`1px solid ${B.border}`, borderRadius:5, padding:"5px 9px", fontSize:8.5, color:"#2d3748", lineHeight:1.4 }}>
+                            <div style={{ background:"#f8fafc", border:`1px solid ${B.border}`, borderRadius:5, padding:"5px 9px", fontSize:10, color:"#2d3748", lineHeight:1.4 }}>
                               {form.notes}
                             </div>
                           </div>
@@ -370,8 +370,8 @@
                             ["The cognitive link","Treating hearing loss helps reduce the risk of cognitive decline and isolation."]
                           ].map(([title,body])=>(
                             <div key={title} style={{ background:B.purpleLight, borderRadius:5, padding:"6px 8px", border:`1px solid ${B.purpleBorder}` }}>
-                              <div style={{ fontWeight:700, fontSize:8.5, color:B.purple, marginBottom:2 }}>{title}</div>
-                              <div style={{ fontSize:8, color:"#4a5568", lineHeight:1.3 }}>{body}</div>
+                              <div style={{ fontWeight:700, fontSize:10, color:B.purple, marginBottom:2 }}>{title}</div>
+                              <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.3 }}>{body}</div>
                             </div>
                           ))}
                         </div>
@@ -386,14 +386,14 @@
                           <SectionTitle>Your Recommended Brand</SectionTitle>
                           <div style={{ border:`1.5px solid ${B.gold}`, borderRadius:7, overflow:"hidden", background:B.goldLight, flex:1 }}>
                             <div style={{ background:B.gold, padding:"5px 11px" }}>
-                              <div style={{ fontFamily:"Georgia,serif", fontSize:11, fontWeight:700, color:B.purple }}>{form.manufacturer} {totalEarsAffected === 1 ? "Hearing Aid" : "Hearing Aids"}</div>
-                              <div style={{ fontSize:8, color:"rgba(74,32,96,0.75)" }}>{mfr.tagline}</div>
+                              <div style={{ fontFamily:"Georgia,serif", fontSize:13, fontWeight:700, color:B.purple }}>{form.manufacturer} {totalEarsAffected === 1 ? "Hearing Aid" : "Hearing Aids"}</div>
+                              <div style={{ fontSize:9.5, color:"rgba(74,32,96,0.75)" }}>{mfr.tagline}</div>
                             </div>
                             <div style={{ padding:"7px 11px" }}>
-                              <div style={{ fontSize:8.5, color:"#2d3748", lineHeight:1.4, fontStyle:"italic", marginBottom:5, paddingBottom:5, borderBottom:`1px solid ${B.goldBorder}` }}>{mfr.why}</div>
+                              <div style={{ fontSize:10, color:"#2d3748", lineHeight:1.4, fontStyle:"italic", marginBottom:5, paddingBottom:5, borderBottom:`1px solid ${B.goldBorder}` }}>{mfr.why}</div>
                               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"3px 10px" }}>
                                 {mfr.highlights.map((h,i)=>(
-                                  <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:5, fontSize:8, color:"#2d3748" }}>
+                                  <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:5, fontSize:9.5, color:"#2d3748" }}>
                                     <div style={{ width:3, height:3, borderRadius:"50%", background:B.gold, marginTop:4, flexShrink:0 }} />
                                     <span>{h}</span>
                                   </div>
@@ -410,9 +410,9 @@
                         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:5, flex:1 }}>
                           {NEXT_STEPS.map((s,i)=>(
                             <div key={i} style={{ background:B.purpleLight, borderRadius:6, padding:"7px 8px", borderLeft:`3px solid ${B.purple}`, display:"flex", flexDirection:"column" }}>
-                              <div style={{ fontSize:14, marginBottom:2 }}>{s.icon}</div>
-                              <div style={{ fontWeight:700, fontSize:8.5, color:B.purple, marginBottom:2 }}>{s.title}</div>
-                              <div style={{ fontSize:8, color:"#4a5568", lineHeight:1.3 }}>
+                              <div style={{ fontSize:16, marginBottom:2 }}>{s.icon}</div>
+                              <div style={{ fontWeight:700, fontSize:10, color:B.purple, marginBottom:2 }}>{s.title}</div>
+                              <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.3 }}>
                                 {s.title === "Connect Member Offer"
                                   ? <span>Become a Connect Member to receive <strong>£150</strong> off your new aids.</span>
                                   : s.desc}
@@ -426,10 +426,10 @@
                     {/* Footer banner */}
                     <div style={{ background:B.purple, borderRadius:7, padding:"8px 14px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
                       <div>
-                        <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:10, fontWeight:700, marginBottom:1 }}>You are not alone.</div>
-                        <div style={{ color:"rgba(255,255,255,0.65)", fontSize:8, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
+                        <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:1 }}>You are not alone.</div>
+                        <div style={{ color:"rgba(255,255,255,0.65)", fontSize:10, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
                       </div>
-                      <div style={{ color:"rgba(255,255,255,0.4)", fontSize:7.5 }}>Hearing Assessment Report · Confidential</div>
+                      <div style={{ color:"rgba(255,255,255,0.4)", fontSize:9 }}>Hearing Assessment Report · Confidential</div>
                     </div>
 
                   </div>
