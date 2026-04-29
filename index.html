@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +11,6 @@
 <body>
     <div id="root"></div>
 
-```
 <script type="text/babel">
     const { useState } = React;
 
@@ -357,6 +355,12 @@
                             </div>
                           </div>
                         )}
+                        <div>
+                          <SectionTitle>About Your Assessment</SectionTitle>
+                          <div style={{ background:B.bg, border:`1px solid ${B.border}`, borderRadius:5, padding:"6px 9px", fontSize:9.5, color:B.text, lineHeight:1.4 }}>
+                            This report establishes your audiological baseline. If hearing technology is recommended, modern devices offer highly discreet designs, intelligent background noise reduction, and seamless connectivity to integrate effortlessly into your daily routine.
+                          </div>
+                        </div>
                       </div>
 
                       {/* Right column: understanding */}
@@ -444,7 +448,5 @@
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
 </script>
-```
-
 </body>
 </html>
