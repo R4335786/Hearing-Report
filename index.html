@@ -175,17 +175,6 @@
           </div>
         );
 
-        const PageFooter = ({ audiologistName, dateStr, title, clientName, page }) => (
-          <div style={{ borderTop:`1px solid ${B.border}`, padding:"5px 26px", display:"flex",
-            justifyContent:"space-between", alignItems:"center", background:"#fafbfc", 
-            position: "absolute", bottom: 0, left: 0, right: 0, height: "30px" }}>
-            <div style={{ fontSize:8, color:B.muted }}>
-              Prepared by {audiologistName} &bull; {dateStr} &bull; Prepared for {title} {clientName}
-            </div>
-            <div style={{ fontSize:8, color:B.muted }}>Page {page} of 2</div>
-          </div>
-        );
-
         function App() {
           const [form, setForm] = useState({
             title: "Mr", clientName:"", clientId:"",
@@ -332,11 +321,11 @@
                       <button onClick={()=>setTab("form")} style={{ background:"white", color:B.purple, border:`1px solid ${B.purpleBorder}`, borderRadius:7, padding:"9px 16px", fontSize:12, cursor:"pointer" }}>← Edit Form</button>
                     </div>
 
-                    {/* PAGE 1 */}
+                    {/* PAGE 1 - FOOTER REMOVED */}
                     <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"15px 26px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
+                      <div style={{ padding:"26px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
                         <div>
                           <SectionTitle>Your Hearing Test Results</SectionTitle>
                           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:8 }}>
@@ -372,14 +361,13 @@
                           </div>
                         )}
                       </div>
-                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr} title={form.title} clientName={form.clientName} page="1" />
                     </div>
 
-                    {/* PAGE 2 */}
+                    {/* PAGE 2 - FOOTER REMOVED */}
                     <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"15px 26px", flex:1, display:"flex", flexDirection:"column", gap:15 }}>
+                      <div style={{ padding:"26px", flex:1, display:"flex", flexDirection:"column", gap:15 }}>
                         {mfr && (
                           <div>
                             <SectionTitle>Your Recommended Brand</SectionTitle>
@@ -420,12 +408,11 @@
                           </div>
                         </div>
 
-                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", marginTop: "auto", marginBottom: "40px" }}>
+                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", marginTop: "auto", marginBottom: "26px" }}>
                             <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:2 }}>You are not alone.</div>
                             <div style={{ color:"rgba(255,255,255,0.65)", fontSize:9.5, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
                         </div>
                       </div>
-                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr} title={form.title} clientName={form.clientName} page="2" />
                     </div>
                   </div>
                 )}
